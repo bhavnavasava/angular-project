@@ -1,0 +1,33 @@
+name: on push github actions
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  print-stuff-from-job-1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, from job 1 world!🚀"
+
+  print-stuff-from-job-2:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Hello, from job 2 world!🚀"
+
+
+  print-readmeMD:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: cat ./README.md
+
+  deploy-to-firebase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci
+      - run: node --version
